@@ -1,0 +1,24 @@
+# Backend
+backend/target/
+backend/.mvn/
+backend/.env
+backend/src/main/resources/application-*.properties
+
+# Mobile
+mobile/node_modules/
+mobile/.expo/
+mobile/dist/
+mobile/.env
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+*.env
+.env
