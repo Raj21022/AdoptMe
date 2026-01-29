@@ -29,12 +29,15 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
+           .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/api/animals/search", "/api/animals/{id}").permitAll()
+                .requestMatchers("/api/upload/**").permitAll()
+                .requestMatchers("/api/animals/search").permitAll()
+                .requestMatchers("/api/animals/{id}").permitAll()
+                .requestMatchers("/api/animals/**").authenticated()  // All other animal routes need auth
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
-            )
+)
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

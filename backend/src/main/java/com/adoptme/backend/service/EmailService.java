@@ -61,4 +61,18 @@ public class EmailService {
                "Best regards,\n" +
                "AdoptMe Team";
     }
+    public void sendEmail(String toEmail, String subject, String body) {
+    try {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromEmail);
+        message.setTo(toEmail);
+        message.setSubject(subject);
+        message.setText(body);
+        
+        mailSender.send(message);
+    } catch (Exception e) {
+        throw new RuntimeException("Failed to send email: " + e.getMessage());
+    }
+   }
+
 }
