@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: adoptme
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/adoptme_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    open-in-view: false
+  
+  security:
+    filter:
+      order: 5
+
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-stacktrace: on_param
+
+# JWT Configuration
+jwt:
+  secret: eW91ci1zZWNyZXQta2V5LXNob3VsZC1iZS1hdC1sZWFzdC0yNTYtYml0cy1sb25nLWZvci1oczI1Ni1hbGdvcml0aG0tc2VjdXJpdHk=
+  expiration: 86400000 # 24 hours in milliseconds
+
+# SendGrid Configuration
+sendgrid:
+  api-key: ${SENDGRID_API_KEY}
+  from-email: ${SENDGRID_FROM_EMAIL:adoptmenoreply7@gmail.com}
+
+# OTP Configuration
+otp:
+  expiration: 300000 # 5 minutes in milliseconds
+  length: 6
+
+# Logging
+logging:
+  level:
+    com.raj.adoptme: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
