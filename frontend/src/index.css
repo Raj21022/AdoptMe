@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-stone-700 antialiased;
+    font-family: 'Manrope', sans-serif;
+    background:
+      radial-gradient(1200px 700px at 8% -12%, rgba(92, 175, 149, 0.18), transparent 60%),
+      radial-gradient(900px 600px at 100% 0%, rgba(229, 127, 95, 0.16), transparent 60%),
+      linear-gradient(180deg, #f7f6f2, #ffffff 70%);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading text-stone-900 leading-tight;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/40 shadow-lg shadow-stone-200/70 rounded-2xl;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-stone-200 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all outline-none bg-white/70;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-brand-500 to-brand-600 text-white font-semibold rounded-xl shadow-lg shadow-brand-500/30 transition-all active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 bg-warm-400 hover:bg-warm-500 text-white font-semibold rounded-xl shadow-lg shadow-warm-400/25 transition-all active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply px-6 py-3 text-stone-600 hover:text-brand-600 rounded-xl transition-all;
+  }
+}
+
+/* Page transitions */
+.page-enter {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
