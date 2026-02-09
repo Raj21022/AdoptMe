@@ -5,12 +5,28 @@ let stompClient = null;
 let activeSocket = null;
 let activeSubscription = null;
 
+const resolveWsUrl = () => {
+  const explicit = import.meta.env.VITE_WS_URL;
+  if (explicit) return explicit;
+
+  const apiBase = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+  const base = apiBase.replace(/\/api\/?$/i, '');
+  const wsUrl = `${base}/ws`;
+
+  // If the app is served over HTTPS, ensure we don't initiate an insecure SockJS connection.
+  if (typeof window !== 'undefined' && window.location?.protocol === 'https:') {
+    return wsUrl.replace(/^http:/i, 'https:');
+  }
+
+  return wsUrl;
+};
+
 export const connect = (conversationKey, onMessageReceived) => {
   if (!conversationKey) return;
 
   disconnect();
 
-  activeSocket = new SockJS('http://localhost:8080/ws');
+  activeSocket = new SockJS(resolveWsUrl());
   stompClient = Stomp.over(activeSocket);
 
   // Disable verbose logs in browser console.
