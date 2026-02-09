@@ -8,7 +8,7 @@ AdoptMe is an animal adoption platform that connects adopters with individual li
 
 ### Core Features
 - Email OTP verification (SendGrid).
-- Pet listing with multi‑image support (Cloudinary).
+- Pet listing with multi-image support (Cloudinary).
 - Search and filter by location and animal type.
 - Chat between adopters and listers.
 - Pet status and safety metadata (adoption status, vaccination, stray).
@@ -47,7 +47,7 @@ Backend runs on `http://localhost:8080`
 ---
 
 ## Configuration
-Edit `backend/src/main/resources/application.properties`:
+Edit `backend/src/main/resources/application.properties` or set environment variables from `.env`:
 - `spring.datasource.url`
 - `spring.datasource.username`
 - `spring.datasource.password`
@@ -56,9 +56,10 @@ Edit `backend/src/main/resources/application.properties`:
 - `cloudinary.cloud.name`
 - `cloudinary.api.key`
 - `cloudinary.api.secret`
+- `jwt.secret`
 
 Security note:
-- Do not commit real API keys. Use environment‑specific config or secrets before pushing to GitHub.
+- Do not commit real API keys. Use `.env` locally and keep it out of Git.
 
 ---
 
@@ -82,6 +83,28 @@ Frontend build:
 ```powershell
 npm run build
 ```
+
+---
+
+## Deployment
+
+### Environment Variables
+Use `.env` locally and platform secrets in production. Required keys:
+- `DB_URL`, `DB_USER`, `DB_PASSWORD`
+- `JWT_SECRET`
+- `SENDGRID_API_KEY`, `SENDGRID_FROM_EMAIL`
+- `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET`
+- `CORS_ALLOWED_ORIGINS`
+- `VITE_API_URL` (frontend build-time)
+
+### Docker (local or cloud)
+From repo root:
+```powershell
+docker compose up --build
+```
+
+Backend: `http://localhost:8080`  
+Frontend: `http://localhost:5173`
 
 ---
 
